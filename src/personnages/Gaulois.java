@@ -26,7 +26,7 @@ public class Gaulois {
 	}
 	
 	public void frapper(Romain romain) {
-		System.out.println(nom+" envoie un grand coup dans la mâchoire de "+ romain.getNom());
+		System.out.println(nom+" envoie un grand coup dans la machoire de "+ romain.getNom());
 		romain.recevoirCoup(force/3);
 	}
 
@@ -42,7 +42,7 @@ public class Gaulois {
 		rom1 = new Romain ("alex",15);
 		
 		gau1.frapper(rom1);
-		System.out.println("Voila la force de "+rom1.getNom()+"aprés le coups de "+gau1.getNom());
+		System.out.println("Voila la force de "+rom1.getNom()+"apr�s le coups de "+gau1.getNom());
 		System.out.println(rom1.getForce());
 		
 	}
