@@ -32,11 +32,18 @@ public class Romain {
 	public void recevoirCoup(int forceCoup) {
 		force -= forceCoup;
 		if(force > 0) {
-			parler("aîe");
+			parler("aÃ¯e");
 		}
 		else {
 			parler("j'abandonne...");
 		}
+	}
+	public static void main(String[] args){
+		Romain romain = new Romain("Vantouse",50);
+		System.out.println(romain.prendreParole());
+		romain.parler("Ne parlez point de cette fripouille, son change m'indigne.");
+		romain.recevoirCoup(23);
+		
 	}
 	
 }
