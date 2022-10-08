@@ -5,63 +5,68 @@ import personnages.Gaulois;
 public class Village {
 	
 	private String nom;
-	private int nbVillageoisMaximum;
-	private int nbVillageois = 0;
 	private Gaulois[] villageois;
+	private int nbVillageois;
 	private Chef chef;
 	
-	public Village(String nom, int nbVillageoisMaximum) {
+	public Village(String nom,int nbVillageoisMaximum) {
 		this.nom = nom;
-		this.nbVillageoisMaximum = nbVillageoisMaximum;
+		this.nbVillageois = 0;
 		this.villageois = new Gaulois[nbVillageoisMaximum];
-		
 	}
+	
+	public void setChef(Chef chef) {
+		this.chef = chef;
+	}
+		
 	public String getNom() {
 		return nom;
 	}
 	
-	public void ajouterHabitant(Gaulois gaulois) {
-		if( nbVillageois < villageois.length){
+	public void ajouterHabitant(Gaulois gaulois){
+		if(nbVillageois < villageois.length) {
 			villageois[nbVillageois++] = gaulois;
 		}
 		else {
-			System.out.println("Vous ne pouvez plus ajouter de villageois.");
+			System.out.println("On ne peut plus ajouter de Gaulois.");
 		}
+		
 	}
 	
-	public Gaulois trouverHabitant(int numeroVillageois) {
-		if(numeroVillageois < nbVillageoisMaximum) {
-			return villageois[numeroVillageois];
+	public Gaulois trouverHabitant(int numeroHabitant) {
+		if(numeroHabitant < villageois.length) {
+			return villageois[numeroHabitant];
 		}
-		else{
+		else
+		{
 			return null;
 		}
-	
 	}
 	
-	public void afficherVillageois() {
+	public void afficherVillageois(Chef chef) {
+		System.out.println("Dans le village du chef "+chef.getNom()+" vivent les lÃ©gendaires gaulois ");
+		for(int k =0 ;k < nbVillageois; k++) {
+			System.out.println("-> "+villageois[k].getNom());
+		}
 		
 	}
 	
 	public static void main(String[] args) {
-		Village v1;
-		v1 = new Village("Village des Irréductibles",30);
 		
-		/*Gaulois gaulois = village.trouverHabitant(30);*/
-		//Gaulois gaulois permet de faire une instance de classe, d'ou création d'un objet.
-		//village n'est pas compatible avec Village car se sont deux classe différent.
-		Chef c1 = new Chef("Abraracourcix",500,7,v1);
-		Gaulois g1 = new Gaulois("gaulois Astérix",5,30);
+		Village V1 = new Village("Village des IrrÃ©ductibles",30);
+		Chef C1 = new Chef("Abraracourcix",6,V1);
 		
-		v1.ajouterHabitant(g1);
-		Gaulois gaulois = v1.trouverHabitant(0);
+		Gaulois Asterix = new Gaulois("Asterix",6);
+		Gaulois Obelix = new Gaulois("Obelix",25);
+				
+		V1.ajouterHabitant(Asterix);
+		V1.ajouterHabitant(Obelix);
+		V1.afficherVillageois(C1);
 		
-		System.out.println(gaulois);
 		
-		//Il y a affichage des valeurs du constructeurs gaulois.
+		
 		
 		
 	}
-	
 	
 }
