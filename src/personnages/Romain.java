@@ -1,6 +1,7 @@
 package personnages;
 
 import equipements.Equipement;
+import histoire.Scenario;
 
 public class Romain {
 
@@ -10,11 +11,13 @@ public class Romain {
 	private int nbEquipement = 0;
 
 	public Romain(String nom, int force) {
+		super();
 		this.nom = nom;
 		this.force = force;
 		this.equipement = new Equipement[2];
-
+		
 		assert force > 0;
+
 	}
 
 	public String getNom() {
@@ -40,7 +43,7 @@ public class Romain {
 	 * 
 	 * assert forceCoup > 0;
 	 * 
-	 * int forceInitial = force; force -= forceCoup; if(force > 0) { parler("aîe");
+	 * int forceInitial = force; force -= forceCoup; if(force > 0) { parler("aï¿½e");
 	 * } else { parler("j'abandonne..."); } assert forceInitial > force; }
 	 */
 
@@ -50,7 +53,7 @@ public class Romain {
 			ajouterEquipement(equipements);
 		} else {
 			if (equipement[nbEquipement - 1] == equipements) {
-				parler("posséde déjà un " + equipements);
+				parler("possÃ©de dÃ©jÃ  un " + equipements);
 			} else {
 				ajouterEquipement(equipements);
 			}
@@ -58,7 +61,7 @@ public class Romain {
 	}
 
 	private void ajouterEquipement(Equipement equipements) {
-		parler("s'équipe avec un " + equipements);
+		parler("s'Ã©quipe avec un " + equipements);
 		equipement[nbEquipement] = equipements;
 		nbEquipement++;
 	}
@@ -75,41 +78,41 @@ public class Romain {
 			mesEquipements(equipements);
 			break;
 		default:
-			parler("Le soldat " + getNom() + " est bien protégé");
+			parler("Le soldat " + getNom() + " est bien protÃ©gÃ©");
 			break;
 		}
 
 	}
 
-	public Equipement[] recevoirCoup(int forceCoup) {
+	public Equipement[] recevoirCoup(int forceCoup) {		
 		Equipement[] equipementEjecte = null;
-		// précondition
+		// prÃ©condition
 		assert force > 0;
 		int oldForce = force;
 		forceCoup = calculResistanceEquipement(forceCoup);
 		force -= forceCoup;
-		// if (force > 0) {
-		// parler("Aïe");
-		// } else {
-		// equipementEjecte = ejecterEquipement();
-		// parler("J'abandonne...");
-		// }
-		switch (force) {
-			case 0:
-					parler("Aïe");
-					break;
-			case 1:
-					parler("Bon dié, out zot li sont dans bonne condition, mayday");
-					break;
-			case 2:
-					parler("Oh nooooon mon coeur saigne!");
-					break;
-			default:
-				equipementEjecte = ejecterEquipement();
-				parler("J'abandonne...");
-				break;
+		
+		//if (force > 0) {
+			
+		//	parler("AÃ®e");
+		//} 
+		//else {
+		//	equipementEjecte = ejecterEquipement();
+		//	parler("J'abandonne...");
+		//}
+		switch(force) {
+		case 0:
+			parler("AÃ¯e");
+			break;
+		case 1:
+			parler("Mon dieu, je me vois mourir, nooooon pas Ã§a !");
+			break;
+		default:
+			parler("J'abandone");
+			equipementEjecte = ejecterEquipement();
+			break;
 		}
-		// post condition la force à diminuer
+		// post condition la force ï¿½ diminuer
 		assert force < oldForce;
 		return equipementEjecte;
 
@@ -119,7 +122,7 @@ public class Romain {
 		String texte = "Ma force est  de " + this.force + ", et la force du coup est de " + forceCoup;
 		int resistanceEquipement = 0;
 		if ((nbEquipement != 0)) {
-			texte += "\nMais heureusement, grace à mon équipement sa force est diminué de ";
+			texte += "\nMais heureusement, grace Ã  mon Ã©quipement sa force est diminuÃ©e de ";
 			for (int i = 0; i < nbEquipement;i++) {
 				if ((equipement[i] != null && equipement[i].equals(Equipement.BOUCLIER))) {
 					resistanceEquipement += 8;
@@ -137,35 +140,34 @@ public class Romain {
 
 	private Equipement[] ejecterEquipement() {
 		Equipement[] equipementEjecte = new Equipement[nbEquipement];
-		System.out.println("L'équipement  de  " + nom.toString() + "s'envole sous la force du coup.");
-		// TODO
+		System.out.println("L'Ã©quipement  de  " + getNom() + " s'envole sous la force du coup.");
+		
 		int nbEquipementEjecte = 0;
 		for (int i = 0; i < nbEquipement; i++) {
-
-			if (equipement[i] == null) {
-				continue;
-			} else {
+			if (equipement[i] != null) {
 				equipementEjecte[nbEquipementEjecte] = equipement[i];
 				nbEquipementEjecte++;
 				equipement[i] = null;
 			}
 		}
+		
 		return equipementEjecte;
 	}
-
+	
 	public static void main(String[] args) {
 		Romain romain = new Romain("Vantouse", 46);
 		System.out.println(romain.prendreParole());
-		romain.parler("Ne parlez point de cette fripouille, son change m'indigne.");
+		romain.parler("Ne me parlez point de cette fripouille, son change m'indigne.");
+		romain.parler("Oh seigneur, veillez sur mes compatriotes!");
 		romain.recevoirCoup(23);
 		Equipement c1;
 		Equipement c2;
 		c1 = Equipement.BOUCLIER;
 		c2 = Equipement.CASQUE;
 		romain.sEquiper(c1);
-		romain.sEquiper(c1);
 		romain.sEquiper(c2);
-		romain.sEquiper(c2);
+		
+
 
 	}
 

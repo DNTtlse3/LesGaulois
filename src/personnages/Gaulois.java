@@ -1,18 +1,27 @@
 package personnages;
 
+import villageois.Musee;
 import equipements.Equipement;
+import histoire.Scenario;
+
+
 public class Gaulois {
 	
 	private String nom;
 	private int force;
-	private int nb_trophees;
+	private int nbtrophees;
 	private int effetPotion = 1;
 	private Equipement[] trophees = new Equipement[100];
 	private String texte;
+	
+	
 	public Gaulois(String nom, int force) {
+		super();
 		this.nom = nom;
 		this.force = force;
 		this.texte = "Le gaulois " + nom + " : "; 
+		
+		
 	}
 	
 	public String getNom() {
@@ -39,11 +48,11 @@ public class Gaulois {
 	 
 
 	 public void frapper(Romain romain) {
-		 System.out.println(nom + " envoie un grand coup dans la m‚choire de " + romain.getNom()); 
-		 romain.recevoirCoup((force  /  3)  * effetPotion);
-		 for(int  i  =  0;  trophees  !=  null  &&  i  <  trophees.length;  i++, nb_trophees++) { 
-			 this.trophees[nb_trophees] = trophees[i]; 
-	 	}  
+		 System.out.println(nom + " envoie un grand coup dans la m√¢choire de " + romain.getNom()); 
+		 Equipement[] equipementEjecte = romain.recevoirCoup((force  /  3)  * effetPotion);
+		 for(int  i  =  0;  equipementEjecte  !=  null  &&  i  <  equipementEjecte.length;  i++, nbtrophees++) { 
+			 this.trophees[nbtrophees] = equipementEjecte[i]; 
+	 	}
 	 } 
 
 	@Override
@@ -51,18 +60,38 @@ public class Gaulois {
 		return "Gaulois [nom=" + nom + ", force=" + force + ", effetpotion=" + effetPotion + "]";
 	}
 	public void boirePotion(int forcePotion) {
-		parler("Merci Druide je sens que ma force est "+forcePotion+" fois dÈcuplÈe.");
-		effetPotion *= forcePotion*10;
+		parler("Merci Druide je sens que ma force est "+forcePotion+" fois d√©cupl√©e.");
+		effetPotion *= forcePotion;
 		
 	}
+	
+	public void faireUneDonnation(Musee musee) {
+		if(nbtrophees > 0) {
+			parler("Je donne au musee tous mes troph√©es");
+			for(int k=0;k<nbtrophees;k++) {
+				System.out.println("- "+this.trophees[k]);
+				//musee.donnerTrophees(,trophees[k]);
+			
+				
+			}
+			
+		}
+		else {
+			parler("Actuellement, je ne peux faire de donnation d'objets");
+		}
+	}
+	
 	public static void main(String[] args) {
 		
-		Gaulois gaulois = new Gaulois("AstÈrix",80);
+		Gaulois gaulois = new Gaulois("Ast√©rix",80);
 		System.out.println(gaulois.prendreParole());
-		gaulois.parler("Bonjour les blÈrauds, vous aller bien les gens.");
-		Romain romain = new Romain("Jules-CÈard",150);
+		gaulois.parler("Bonjour les bl√©rauds, vous aller bien les gens.");
+		Romain romain = new Romain("Jules-Card",150);
 		gaulois.frapper(romain);
 		gaulois.boirePotion(5);
+		
+		//Cr√©ation du mus√©e.
+		//Musee m1 = new Musee();
 		
 		
 		
