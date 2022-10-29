@@ -31,9 +31,13 @@ public class Druide {
 	}
 
 	public void preparerPotion() {
+		
 		Random rand = new Random();
+		
 		forcePotion = rand.nextInt(effetPotionMax - effetPotionMin);
+		
 		forcePotion += effetPotionMin;
+		
 		if (forcePotion > 7) {
 			parler("J'ai préparé une super potion de force " + forcePotion);
 
@@ -61,6 +65,7 @@ public class Druide {
 		Druide Panoraminx = new Druide("Panoraminx", 5, 10);
 
 		Gaulois gaulois = new Gaulois("Obélix", 5);
+		
 		Panoraminx.booster(gaulois);
 	}
 

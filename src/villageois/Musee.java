@@ -19,4 +19,14 @@ public class Musee {
 		}
 		
 	}
+	
+	public Trophee[] getPieceDeCollection() {
+		return pieceDeCollection;
+		
+	
+	}
+
+	public int getNbTrophee() {
+		return nbTrophee;
+	}
 }

@@ -48,9 +48,13 @@ public class Gaulois {
 	 
 
 	 public void frapper(Romain romain) {
-		 System.out.println(nom + " envoie un grand coup dans la mâchoire de " + romain.getNom()); 
+		 
+		 parler("J'envoie un grand coup dans la mâchoire de " + romain.getNom()); 
+		 
 		 Equipement[] equipementEjecte = romain.recevoirCoup((force  /  3)  * effetPotion);
+		 
 		 for(int  i  =  0;  equipementEjecte  !=  null  &&  i  <  equipementEjecte.length;  i++, nbtrophees++) { 
+			 
 			 this.trophees[nbtrophees] = equipementEjecte[i]; 
 	 	}
 	 } 
@@ -59,6 +63,8 @@ public class Gaulois {
 	public String toString() {
 		return "Gaulois [nom=" + nom + ", force=" + force + ", effetpotion=" + effetPotion + "]";
 	}
+	
+	
 	public void boirePotion(int forcePotion) {
 		parler("Merci Druide je sens que ma force est "+forcePotion+" fois décuplée.");
 		effetPotion *= forcePotion;
@@ -67,12 +73,19 @@ public class Gaulois {
 	
 	public void faireUneDonnation(Musee musee) {
 		if(nbtrophees > 0) {
-			parler("Je donne au musee tous mes trophées");
-			for(int k=0;k<nbtrophees;k++) {
-				System.out.println("- "+this.trophees[k]);
-				//musee.donnerTrophees(,trophees[k]);
 			
+			parler("Je donne au musee tous mes trophées");
+			
+			for(int k=0;k<nbtrophees;k++) {
 				
+				if(trophees[k] != null) {
+					
+					parler("- "+this.trophees[k]);
+					
+					musee.donnerTrophees(this,trophees[k]);
+					
+					trophees[k] = null;
+				}
 			}
 			
 		}
@@ -86,12 +99,10 @@ public class Gaulois {
 		Gaulois gaulois = new Gaulois("Astérix",80);
 		System.out.println(gaulois.prendreParole());
 		gaulois.parler("Bonjour les blérauds, vous aller bien les gens.");
-		Romain romain = new Romain("Jules-Card",150);
+		Romain romain = new Romain("Jules-Césard",150);
 		gaulois.frapper(romain);
 		gaulois.boirePotion(5);
 		
-		//Création du musée.
-		//Musee m1 = new Musee();
 		
 		
 		
